@@ -24,6 +24,7 @@
     "autoprefixer": "^10.3.6",
     "babel-loader": "^8.2.2",
     "postcss": "^8.3.8",
+    "postcss-nested": "^5.0.6",
     "prettier": "2.4.1",
     "storybook-builder-vite": "^0.1.0",
     "tailwindcss": "^2.2.16",
