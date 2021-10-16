@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import { useClickOutsideListener } from '../../hooks';
+import React, { useRef, useState } from 'react';
 
 interface DataSelect {
   text: string;
-  value: string | number;
+  value: string;
 }
 
 interface IPropsSelect {
@@ -14,32 +15,35 @@ interface IPropsSelect {
   className?: string;
 }
 
-const Select: React.FC<IPropsSelect> = ({
+const Select = ({
   options,
   onChange,
   defaultValue,
   className,
   placeholder,
   label,
-}) => {
+}: IPropsSelect) => {
   const [open, setOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState<string | number>('');
+  const [selectedValue, setSelectedValue] = useState<string>('');
+  const inputRef = useRef<any>();
+
+  useClickOutsideListener(() => setOpen(false), inputRef.current);
 
   const handleOnClickValue = () => {
     setOpen((prev) => !prev);
   };
 
-  const handleOnClickItem = (value: string | number) => {
+  const handleOnClickItem = (value: string) => {
     setSelectedValue(value);
     setOpen(false);
   };
 
-  const handleOnBlur = () => {
-    setOpen(false);
-  };
-
   return (
-    <div className={`${className} relative`} onBlur={handleOnBlur} tabIndex={0}>
+    <div
+      ref={inputRef}
+      className={`${className} relative`}
+      tabIndex={0}
+    >
       {label && <label>{label}</label>}
       <div
         className="border-primary border rounded p-2 pl-4 cursor-pointer"
@@ -54,6 +58,7 @@ const Select: React.FC<IPropsSelect> = ({
               className="cursor-pointer p-2 pl-4 hover:bg-gray-100"
               key={item.value}
               onClick={() => handleOnClickItem(item.value)}
+              onMouseDown={(e) => {}}
             >
               {item.text}
             </div>
