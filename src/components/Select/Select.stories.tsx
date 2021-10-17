@@ -14,19 +14,53 @@ export default {
 } as ComponentMeta<typeof Select>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Select> = (args) => <Select />;
+const Template: ComponentStory<typeof Select> = (args) => <Select {...args} />;
+
+const TemplateTwoSelect: ComponentStory<any> = (args: any) => (
+  <div>
+    <Select {...args} />
+    <Select {...args} />
+  </div>
+);
 
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-// Primary.args = {
-//   primary: true,
-//   label: 'Select',
-// };
+Primary.args = {
+  options: [
+    {
+      text: 'Test 1',
+      value: 'test1',
+    },
+    {
+      text: 'Test 2',
+      value: 'test2',
+    },
+    {
+      text: 'Test 3',
+      value: 'test3',
+    },
+  ],
+  placeholder: 'Enter here',
+};
 
-// export const Secondary = Template.bind({});
-// Secondary.args = {
-//   label: 'Select',
-// };
+export const TwoSelect = TemplateTwoSelect.bind({});
+TwoSelect.args = {
+  options: [
+    {
+      text: 'Test 1',
+      value: 'test1',
+    },
+    {
+      text: 'Test 2',
+      value: 'test2',
+    },
+    {
+      text: 'Test 3',
+      value: 'test3',
+    },
+  ],
+  placeholder: 'Enter here',
+};
 
 // export const Large = Template.bind({});
 // Large.args = {
